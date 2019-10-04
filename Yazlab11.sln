@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Yazlab11", "Yazlab11\Yazlab11.vcxproj", "{CD69C71B-2B10-428A-83BE-328AB64DB309}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD69C71B-2B10-428A-83BE-328AB64DB309}.Debug|x64.ActiveCfg = Debug|x64
+		{CD69C71B-2B10-428A-83BE-328AB64DB309}.Debug|x64.Build.0 = Debug|x64
+		{CD69C71B-2B10-428A-83BE-328AB64DB309}.Debug|x86.ActiveCfg = Debug|Win32
+		{CD69C71B-2B10-428A-83BE-328AB64DB309}.Debug|x86.Build.0 = Debug|Win32
+		{CD69C71B-2B10-428A-83BE-328AB64DB309}.Release|x64.ActiveCfg = Release|x64
+		{CD69C71B-2B10-428A-83BE-328AB64DB309}.Release|x64.Build.0 = Release|x64
+		{CD69C71B-2B10-428A-83BE-328AB64DB309}.Release|x86.ActiveCfg = Release|Win32
+		{CD69C71B-2B10-428A-83BE-328AB64DB309}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B69032C6-C0E3-4598-BBC2-F76A71D234FC}
+	EndGlobalSection
+EndGlobal
