@@ -23,7 +23,7 @@ void main(array<String^>^ args) {
 	}
 	// Load image
 	cv::Mat im = cv::imread("market-fis.jpg");
-	cv::Mat gray;
+	cv::Mat; gray;
 	cv::cvtColor(im, gray, cv::COLOR_BGR2GRAY);
 	// ...other image pre-processing here...
 
