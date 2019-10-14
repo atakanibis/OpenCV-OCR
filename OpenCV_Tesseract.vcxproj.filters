@@ -24,10 +24,4 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)\..\x86\liblept1753.dll" />
-    <None Include="$(MSBuildThisFileDirectory)\..\x86\libtesseract3052.dll" />
-    <None Include="$(MSBuildThisFileDirectory)\..\x64\liblept1753.dll" />
-    <None Include="$(MSBuildThisFileDirectory)\..\x64\libtesseract3052.dll" />
-  </ItemGroup>
 </Project>

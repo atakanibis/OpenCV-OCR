@@ -1,7 +1,7 @@
 #include "MainForm.h"
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgcodecs.hpp>
-#include "opencv2/imgproc/imgproc.hpp"
+#include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 #include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
