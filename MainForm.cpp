@@ -23,7 +23,7 @@ void main(array<String^>^ args) {
 	}
 	// Load image
 	cv::Mat im = cv::imread("market-fis.jpg");
-	cv::Mat; gray;
+	cv::Mat gray;
 	cv::cvtColor(im, gray, cv::COLOR_BGR2GRAY);
 	// ...other image pre-processing here...
 
@@ -36,4 +36,12 @@ void main(array<String^>^ args) {
 	String^ clistr = gcnew String(out, 0, 999, System::Text::Encoding::UTF8);
 	MessageBox::Show(clistr);
 	Application::Run(% form);
+}
+
+System::Void textBox3_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+
+}
+
+System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+
 }
