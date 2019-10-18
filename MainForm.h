@@ -1,4 +1,12 @@
 #pragma once
+#include <string>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+#include <tesseract/baseapi.h>
+#include <leptonica/allheaders.h>
+#include "Render.h"
 
 namespace OpenCVTesseract {
 
@@ -45,6 +53,7 @@ namespace OpenCVTesseract {
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 
 	private: System::Windows::Forms::Button^ button1;
+
 	protected:
 
 	private:
@@ -170,7 +179,7 @@ namespace OpenCVTesseract {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLight;
-			this->ClientSize = System::Drawing::Size(502, 293);
+			this->ClientSize = System::Drawing::Size(507, 294);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->label3);
@@ -213,7 +222,37 @@ namespace OpenCVTesseract {
 
 			if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 			{
+				const char* FileName = (const char*)(Runtime::InteropServices::Marshal::StringToHGlobalAnsi(openFileDialog1->FileName)).ToPointer();
+
+				Bitmap^ bitmap = (Bitmap^)Bitmap::FromFile(openFileDialog1->FileName);
+				Render::Resize(bitmap, bitmap->Size.Width, bitmap->Size.Height);
+
+				System::Drawing::Rectangle blank = System::Drawing::Rectangle(0, 0, bitmap->Width, bitmap->Height);
+				System::Drawing::Imaging::BitmapData^ bmpdata = bitmap->LockBits(blank, System::Drawing::Imaging::ImageLockMode::ReadWrite, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+				cv::Mat image(cv::Size(bitmap->Width, bitmap->Height), CV_8UC3, bmpdata->Scan0.ToPointer(), cv::Mat::AUTO_STEP);
+				bitmap->UnlockBits(bmpdata);
+
+				std::string ImageName = FileName;
+				cv::Mat gray;
+				cv::resize(image, image, cv::Size(image.cols / 2.5, image.rows / 2.5));
+				cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
+				cv::threshold(gray, gray, 100, 255, cv::THRESH_BINARY);
+				cv::imshow("image", image);
+				cv::imshow("gray", gray);
+
+				// Pass it to Tesseract API
+				tesseract::TessBaseAPI* api = new tesseract::TessBaseAPI();
+				api->Init("./tessdata", "tur", tesseract::OEM_DEFAULT);
+				api->SetPageSegMode(tesseract::PSM_SINGLE_BLOCK);
+				api->SetImage((uchar*)gray.data, gray.cols, gray.rows, 1, gray.cols);
+
+				// Get the text
+				char* out = api->GetUTF8Text();
+				System::String^ clistr = gcnew System::String(out, 0, 999, System::Text::Encoding::UTF8);
+				MessageBox::Show(clistr);
+
+
 			}
 		}
-};
+	};
 };
