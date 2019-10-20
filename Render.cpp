@@ -1,4 +1,5 @@
 #include "Render.h"
+
 namespace Render{
 
 	Bitmap^ Resize(Bitmap^ bmp, int newWidth, int newHeight)
