@@ -243,17 +243,17 @@ namespace OpenCVTesseract {
 				std::string ImageName = FileName;
 				cv::Mat image = cv::imread(ImageName);
 				cv::Mat gray;
-				cv::resize(image, image, cv::Size(image.cols / 2.5, image.rows / 2.5));
+				//cv::resize(image, image, cv::Size(image.cols / 2.5, image.rows / 2.5));
 				cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
 				cv::threshold(gray, gray, 100, 255, cv::THRESH_BINARY);
 				
-				cv::adaptiveThreshold(gray, gray, 255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 31, 2);
+				//cv::adaptiveThreshold(gray, gray, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, 31, 2);
 				cv::imshow("image", image);
 				cv::imshow("gray", gray);
 
 				// Pass it to Tesseract API
 				tesseract::TessBaseAPI* api = new tesseract::TessBaseAPI();
-				api->Init("./tessdata", "eng", tesseract::OEM_DEFAULT);
+				api->Init("./tessdata", "turfast", tesseract::OEM_DEFAULT);
 				api->SetPageSegMode(tesseract::PSM_SINGLE_BLOCK);
 				api->SetImage((uchar*)gray.data, gray.cols, gray.rows, 1, gray.cols);
 
