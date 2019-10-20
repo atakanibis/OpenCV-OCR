@@ -6,4 +6,5 @@ ref struct Receipt {
 	double TotalPrice;
 	double KDV;
 	System::String^ Products;
+	System::String^ Date;
 };

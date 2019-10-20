@@ -49,8 +49,8 @@ int Database::getLastInsertedReceiptID() {
 	}
 	return -1;
 }
-void Database::AddReceipt(int marketID, double total, double kdv, System::String^ bodyOFReceipt) {
-	String^ query = "INSERT INTO `receipts`(`rtotal`, `rkdv`, `rproducts`) VALUES (\"" + total + "\", \"" + kdv + "\", \"" + bodyOFReceipt + "\")";
+void Database::AddReceipt(int marketID, double total, double kdv, System::String^ bodyOFReceipt, System::String^ date) {
+	String^ query = "INSERT INTO `receipts`(`rtotal`, `rkdv`, `rproducts`, `rdate`) VALUES (\"" + total + "\", \"" + kdv + "\", \"" + bodyOFReceipt + "\", \"" + date + "\")";
 	char* charquery = (char*)Runtime::InteropServices::Marshal::StringToHGlobalAnsi(query).ToPointer();
 	int success = mysql_query(connection, charquery);
 	if (success == 0) Debug::WriteLine("Receipt is successfully added.");
@@ -65,7 +65,7 @@ void Database::AddReceipt(int marketID, double total, double kdv, System::String
 
 List<Receipt^>^ Database::getAllReceipts() {
 	List<Receipt^>^ Receipts = gcnew List<Receipt^>();
-	char* query = "SELECT markets.mid, receipts.rid, markets.mname, receipts.rtotal, receipts.rkdv, receipts.rproducts FROM receipts, market_receipt, markets WHERE receipts.rid = market_receipt.rid AND market_receipt.mid = markets.mid";
+	char* query = "SELECT markets.mid, receipts.rid, markets.mname, receipts.rtotal, receipts.rkdv, receipts.rproducts, receipts.rdate FROM receipts, market_receipt, markets WHERE receipts.rid = market_receipt.rid AND market_receipt.mid = markets.mid";
 	int success = mysql_query(connection, query);
 	if (success == 0) {
 		MYSQL_RES* response;
@@ -83,6 +83,7 @@ List<Receipt^>^ Database::getAllReceipts() {
 			handler = gcnew String(row[4]);
 			Double::TryParse(handler, currentReceipt->KDV);
 			currentReceipt->Products = gcnew String(row[5]);
+			currentReceipt->Date = gcnew String(row[6]);
 			Receipts->Add(currentReceipt);
 		}
 	}
