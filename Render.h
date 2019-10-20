@@ -14,7 +14,5 @@ using  namespace System::Drawing;
 using  namespace System::Diagnostics;
 
 namespace Render {
-	Bitmap^ Resize(Bitmap^ bmp, int newWidth, int newHeight);
-	Bitmap^ SetGrayscale(Bitmap^ img);
-	Bitmap^ RemoveNoise(Bitmap^ bmap);
+
 }
