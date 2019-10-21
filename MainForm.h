@@ -46,7 +46,7 @@ namespace OpenCVTesseract {
 
 
 	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::TextBox^ textBox2;
+
 	private: System::Windows::Forms::TextBox^ textBox3;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
@@ -55,6 +55,17 @@ namespace OpenCVTesseract {
 
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
+
+
+
+
+
+	private: System::Windows::Forms::DateTimePicker^ dateTimePicker1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ marketName;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ totalPrice;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ kdv;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ products;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ date;
 
 	protected:
 
@@ -72,7 +83,6 @@ namespace OpenCVTesseract {
 		void InitializeComponent(void)
 		{
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -80,6 +90,12 @@ namespace OpenCVTesseract {
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
+			this->marketName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->totalPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->kdv = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->products = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->date = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
@@ -87,27 +103,18 @@ namespace OpenCVTesseract {
 			// textBox1
 			// 
 			this->textBox1->Location = System::Drawing::Point(742, 96);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox1->Margin = System::Windows::Forms::Padding(2);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(104, 20);
+			this->textBox1->Size = System::Drawing::Size(159, 20);
 			this->textBox1->TabIndex = 2;
 			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MainForm::textBox1_TextChanged);
-			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(742, 122);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(104, 20);
-			this->textBox2->TabIndex = 3;
-			this->textBox2->TextChanged += gcnew System::EventHandler(this, &MainForm::textBox2_TextChanged);
 			// 
 			// textBox3
 			// 
 			this->textBox3->BackColor = System::Drawing::Color::Gainsboro;
 			this->textBox3->Enabled = false;
 			this->textBox3->Location = System::Drawing::Point(321, 50);
-			this->textBox3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox3->Margin = System::Windows::Forms::Padding(2);
 			this->textBox3->Multiline = true;
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(305, 280);
@@ -119,7 +126,7 @@ namespace OpenCVTesseract {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(162)));
-			this->label1->Location = System::Drawing::Point(653, 99);
+			this->label1->Location = System::Drawing::Point(653, 103);
 			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(88, 13);
@@ -145,7 +152,7 @@ namespace OpenCVTesseract {
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(162)));
-			this->label3->Location = System::Drawing::Point(653, 125);
+			this->label3->Location = System::Drawing::Point(655, 127);
 			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(86, 13);
@@ -156,8 +163,12 @@ namespace OpenCVTesseract {
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(9, 341);
-			this->dataGridView1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
+				this->marketName,
+					this->totalPrice, this->kdv, this->products, this->date
+			});
+			this->dataGridView1->Location = System::Drawing::Point(9, 340);
+			this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
@@ -170,7 +181,7 @@ namespace OpenCVTesseract {
 			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(162)));
 			this->button1->Location = System::Drawing::Point(9, 17);
-			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button1->Margin = System::Windows::Forms::Padding(2);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(617, 29);
 			this->button1->TabIndex = 9;
@@ -181,12 +192,55 @@ namespace OpenCVTesseract {
 			// pictureBox1
 			// 
 			this->pictureBox1->Location = System::Drawing::Point(9, 50);
-			this->pictureBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(2);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(293, 280);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 10;
 			this->pictureBox1->TabStop = false;
+			// 
+			// dateTimePicker1
+			// 
+			this->dateTimePicker1->Location = System::Drawing::Point(744, 121);
+			this->dateTimePicker1->Name = L"dateTimePicker1";
+			this->dateTimePicker1->Size = System::Drawing::Size(159, 20);
+			this->dateTimePicker1->TabIndex = 11;
+			// 
+			// marketName
+			// 
+			this->marketName->FillWeight = 250;
+			this->marketName->HeaderText = L"Market Name";
+			this->marketName->Name = L"marketName";
+			this->marketName->ReadOnly = true;
+			this->marketName->Width = 250;
+			// 
+			// totalPrice
+			// 
+			this->totalPrice->HeaderText = L"Total Price";
+			this->totalPrice->Name = L"totalPrice";
+			this->totalPrice->ReadOnly = true;
+			// 
+			// kdv
+			// 
+			this->kdv->HeaderText = L"KDV";
+			this->kdv->Name = L"kdv";
+			this->kdv->ReadOnly = true;
+			// 
+			// products
+			// 
+			this->products->FillWeight = 250;
+			this->products->HeaderText = L"Products";
+			this->products->Name = L"products";
+			this->products->ReadOnly = true;
+			this->products->Width = 250;
+			// 
+			// date
+			// 
+			this->date->FillWeight = 150;
+			this->date->HeaderText = L"Date";
+			this->date->Name = L"date";
+			this->date->ReadOnly = true;
+			this->date->Width = 150;
 			// 
 			// MainForm
 			// 
@@ -194,6 +248,7 @@ namespace OpenCVTesseract {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlLight;
 			this->ClientSize = System::Drawing::Size(913, 461);
+			this->Controls->Add(this->dateTimePicker1);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dataGridView1);
@@ -201,11 +256,11 @@ namespace OpenCVTesseract {
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox3);
-			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MainForm";
 			this->Text = L"MainForm";
+			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
@@ -217,6 +272,11 @@ namespace OpenCVTesseract {
 
 		}
 		System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+			for each (DataGridViewRow^ row in dataGridView1->Rows)
+			{
+				if (row->Cells[0]->ToString()->Contains(textBox1->Text)) row->Visible = true;
+				else row->Visible = false;
+			}
 		}
 		System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
 		}
@@ -242,14 +302,21 @@ namespace OpenCVTesseract {
 				pictureBox1->Image = Image::FromFile(openFileDialog1->FileName);
 				std::string ImageName = FileName;
 				cv::Mat image = cv::imread(ImageName);
-				cv::Mat gray;
-				//cv::resize(image, image, cv::Size(image.cols / 2.5, image.rows / 2.5));
+				cv::Mat CopyImage = image;
+				cv::Mat gray, Copygray;
+				cv::resize(CopyImage, CopyImage, cv::Size(CopyImage.cols / 2.5, CopyImage.rows / 2.5));
+
 				cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
+				cv::cvtColor(CopyImage, Copygray, cv::COLOR_BGR2GRAY);
+
 				cv::threshold(gray, gray, 100, 255, cv::THRESH_BINARY);
-				
-				//cv::adaptiveThreshold(gray, gray, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, 31, 2);
-				cv::imshow("image", image);
-				cv::imshow("gray", gray);
+				cv::threshold(Copygray, Copygray, 100, 255, cv::THRESH_BINARY);
+
+				cv::adaptiveThreshold(gray, gray, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, 31, 2);
+				cv::adaptiveThreshold(Copygray, Copygray, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, 31, 2);
+
+				cv::imshow("image", CopyImage);
+				cv::imshow("gray", Copygray);
 
 				// Pass it to Tesseract API
 				tesseract::TessBaseAPI* api = new tesseract::TessBaseAPI();
@@ -260,9 +327,21 @@ namespace OpenCVTesseract {
 				// Get the text
 				char* out = api->GetUTF8Text();
 				System::String^ clistr = gcnew System::String(out, 0, 999, System::Text::Encoding::UTF8);
-				MessageBox::Show(clistr);
+				System::String^ textBoxString = (System::String^)clistr->Clone();
+				textBoxString = textBoxString->Replace("\n", Environment::NewLine);
+				textBox3->Text = textBoxString;
+				MessageBox::Show(Render::FindKDV(clistr).ToString());
+				MessageBox::Show(Render::FindPrice(clistr).ToString());
+				MessageBox::Show(Render::FindDate(clistr));
 
-
+			}
+		}
+		System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
+			Database^ db = gcnew Database();
+			auto Receipts = db->getAllReceipts();
+			for each (auto Receipt in Receipts)
+			{
+				dataGridView1->Rows->Add(Receipt->MarketName, Receipt->TotalPrice, Receipt->KDV, Receipt->Products, Receipt->Date);
 			}
 		}
 	};
