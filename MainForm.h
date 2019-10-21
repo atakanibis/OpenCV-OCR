@@ -274,8 +274,10 @@ namespace OpenCVTesseract {
 		System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 			for each (DataGridViewRow^ row in dataGridView1->Rows)
 			{
-				if (row->Cells[0]->ToString()->Contains(textBox1->Text)) row->Visible = true;
-				else row->Visible = false;
+				if (row->Cells["marketName"]->Value != nullptr) {
+					if(row->Cells["marketName"]->Value->ToString()->Contains(textBox1->Text)) row->Visible = true;
+					else row->Visible = false;
+				}
 			}
 		}
 		System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
