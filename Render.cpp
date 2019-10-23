@@ -22,6 +22,16 @@ namespace Render{
 		}
 		return -1;
 	}
+	String^ FindName(String^ text) {
+		auto lines = text->Split('\n');
+		auto line = lines[0];
+		auto uppercase = line->ToUpper();
+		if (uppercase->Contains("IYI GUNLER") || uppercase->Contains("İYİ GÜNLER") || uppercase->Contains("TESEKKURLER") || uppercase->Contains("TEŞEKKÜRLER")) {
+			line = lines[1];
+			uppercase = line->ToUpper();			
+		}
+		return uppercase;
+	}
 	double FindPrice(String^ text) {
 		auto lines = text->Split('\n');
 		bool startsearch = false;
