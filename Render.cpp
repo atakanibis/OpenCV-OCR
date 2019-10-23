@@ -35,7 +35,7 @@ namespace Render{
 		String ^ replace = (String^)text->Clone();
 		replace = replace->Replace(" ", "");
 		replace = replace->ToUpper();
-		Regex^ regex = gcnew Regex("F(�|I)(�|S)NO\\D*(\\d*)");
+		Regex^ regex = gcnew Regex("F(İ|I)(Ş|S)NO\\D*(\\d*)");
 		Match^ m = regex->Match(replace);
 		int response;
 		if (m->Success) {
