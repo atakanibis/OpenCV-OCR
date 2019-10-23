@@ -25,7 +25,7 @@ namespace Render{
 		auto lines = text->Split('\n');
 		auto line = lines[0];
 		auto uppercase = line->ToUpper();
-		if (uppercase->Contains("IYI GUNLER") || uppercase->Contains("�Y� G�NLER") || uppercase->Contains("TESEKKURLER") || uppercase->Contains("TE�EKK�RLER")) {
+		if (uppercase->Contains("IYI GUNLER") || uppercase->Contains("İYİ GüNLER") || uppercase->Contains("TESEKKURLER") || uppercase->Contains("TEŞEKKÜRLER")) {
 			line = lines[1];
 			uppercase = line->ToUpper();			
 		}
