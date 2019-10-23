@@ -299,7 +299,7 @@ namespace OpenCVTesseract {
 			OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog;
 
 			openFileDialog1->InitialDirectory = "c:\\";
-			openFileDialog1->Filter = "Image Files (*.jpg,*.png,*.jpeg)|*.jpg;*.png;*.jpeg|All files (*.*)|*.*";
+			openFileDialog1->Filter = "Image Files (*.jpg,*.png,*.jpeg)|*.jpg;*.png;*.jpeg;*.tiff|All files (*.*)|*.*";
 			openFileDialog1->FilterIndex = 1;
 			openFileDialog1->RestoreDirectory = true;
 
@@ -311,7 +311,7 @@ namespace OpenCVTesseract {
 				cv::Mat image = cv::imread(ImageName);
 				cv::Mat CopyImage = image;
 				cv::Mat gray, Copygray;
-				cv::resize(CopyImage, CopyImage, cv::Size(CopyImage.cols / 2.5, CopyImage.rows / 2.5));
+				cv::resize(CopyImage, CopyImage, cv::Size(360, 480));
 
 				cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
 				cv::cvtColor(CopyImage, Copygray, cv::COLOR_BGR2GRAY);

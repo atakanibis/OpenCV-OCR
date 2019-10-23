@@ -10,4 +10,5 @@ namespace Render {
 	double FindKDV(String^ text);
 	double FindPrice(String^ text);
 	String^ FindDate(String^ text);
+	int FindReceiptNo(String^ text);
 }

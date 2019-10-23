@@ -18,6 +18,6 @@ public:
 	void addMarket(System::String^ marketname);
 	int GetMarketID(System::String^ marketname);
 	int getLastInsertedReceiptID();
-	void AddReceipt(int marketID, double total, double kdv, System::String^ bodyOFReceipt, System::String^ date);
+	void AddReceipt(int marketID, int receiptNo, double total, double kdv, System::String^ bodyOFReceipt, System::String^ date);
 	List<Receipt^>^ getAllReceipts();
 };
