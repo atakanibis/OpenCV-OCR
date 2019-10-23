@@ -43,16 +43,6 @@ namespace Render{
 		}
 		return response;
 	}
-	String^ FindName(String^ text) {
-		auto lines = text->Split('\n');
-		auto line = lines[0];
-		auto uppercase = line->ToUpper();
-		if (uppercase->Contains("IYI GUNLER") || uppercase->Contains("�Y� G�NLER") || uppercase->Contains("TESEKKURLER") || uppercase->Contains("TE�EKK�RLER")) {
-			line = lines[1];
-			uppercase = line->ToUpper();
-		}
-		return uppercase;
-	}
 	double FindPrice(String^ text) {
 		String^ replace = (String^)text->Clone();
 		auto lines = replace->Split('\n');
