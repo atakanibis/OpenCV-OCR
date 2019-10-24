@@ -50,7 +50,10 @@ int Database::getLastInsertedReceiptID() {
 	return -1;
 }
 void Database::AddReceipt(int marketID, int receiptNo, double total, double kdv, System::String^ bodyOFReceipt, System::String^ date) {
-	String^ query = "INSERT INTO `receipts`(`rno`, `rtotal`, `rkdv`, `rproducts`, `rdate`) VALUES (\"" + receiptNo + "\", \"" + total + "\", \"" + kdv + "\", \"" + bodyOFReceipt + "\", \"" + date + "\")";
+	NumberFormatInfo^ doubletostr = gcnew NumberFormatInfo();
+	doubletostr->NumberDecimalSeparator = ".";
+	String^ query = "INSERT INTO `receipts`(`rno`, `rtotal`, `rkdv`, `rproducts`, `rdate`) VALUES (\"" + receiptNo + "\", \"" + total.ToString(doubletostr) + "\", \"" + kdv.ToString(doubletostr) + "\", \"" + bodyOFReceipt + "\", \"" + date + "\")";
+	Debug::WriteLine(query);
 	char* charquery = (char*)Runtime::InteropServices::Marshal::StringToHGlobalAnsi(query).ToPointer();
 	int success = mysql_query(connection, charquery);
 	if (success == 0) Debug::WriteLine("Receipt is successfully added.");
@@ -78,9 +81,9 @@ List<Receipt^>^ Database::getAllReceipts() {
 			handler = gcnew String(row[1]);
 			Int32::TryParse(handler, currentReceipt->ReceiptID);
 			currentReceipt->MarketName = gcnew String(row[2]);
-			handler = gcnew String(row[3]);
+			handler = (gcnew String(row[3]))->Replace(".",",");
 			Double::TryParse(handler, currentReceipt->TotalPrice);
-			handler = gcnew String(row[4]);
+			handler = (gcnew String(row[4]))->Replace(".", ",");
 			Double::TryParse(handler, currentReceipt->KDV);
 			currentReceipt->Products = gcnew String(row[5]);
 			currentReceipt->Date = gcnew String(row[6]);

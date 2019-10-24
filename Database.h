@@ -7,6 +7,7 @@
 using namespace System::Diagnostics;
 using namespace System;
 using System::Collections::Generic::List;
+using namespace System::Globalization;
 
 ref class Database {
 private:
