@@ -333,15 +333,11 @@ namespace OpenCVTesseract {
 				cv::Mat Copygray;
 				cv::resize(CopyImage, CopyImage, cv::Size(360, 480));
 				cv::cvtColor(CopyImage, Copygray, cv::COLOR_BGR2GRAY);
-				cv::threshold(Copygray, Copygray, 100, 255, cv::THRESH_BINARY);
-				cv::adaptiveThreshold(Copygray, Copygray, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, 31, 2);
 
 				cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
-				cv::threshold(gray, gray, 100, 255, cv::THRESH_BINARY);
-				cv::adaptiveThreshold(gray, gray, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, 31, 2);
 
-				cv::imshow("image", CopyImage);
-				cv::imshow("gray", Copygray);
+				/*cv::imshow("image", CopyImage);
+				cv::imshow("gray", Copygray);*/
 
 				// Pass it to Tesseract API
 				tesseract::TessBaseAPI* api = new tesseract::TessBaseAPI();

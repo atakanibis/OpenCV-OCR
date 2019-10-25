@@ -27,10 +27,10 @@ namespace Render{
 		{
 			auto uppercase = line->ToUpper();
 			if (uppercase->Length < 5) continue;
-			if (!(uppercase->Contains("IYI GUNLER") || uppercase->Contains("İYİ GÜNLER") || uppercase->Contains("TESEKKURLER") || uppercase->Contains("TEŞEKKÜRLER"))) {
-				return line;
-			}
-
+			Regex^ date = gcnew Regex("(TE.EKK.RLER) | (.Y. G.NLER)");
+			Match^ datematch = date->Match(line);
+			if (datematch->Success) continue;
+			return line;
 		}
 		return "Unknown";
 	}
@@ -54,6 +54,9 @@ namespace Render{
 		String^ productions = "";
 		for each (auto line in lines)
 		{
+			Regex^ date = gcnew Regex("TAR.H");
+			Match^ datematch = date->Match(line);
+			if (datematch->Success) continue;
 			Regex^ regex = gcnew Regex("(\\d+)(\\D)([0-9]+\\.[0-9]+)$");
 			Match^ m = regex->Match(line);
 			if (m->Success) {
