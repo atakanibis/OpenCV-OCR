@@ -328,9 +328,8 @@ namespace OpenCVTesseract {
 				pictureBox1->Image = Image::FromFile(openFileDialog1->FileName);
 				std::string ImageName = FileName;
 				cv::Mat image = cv::imread(ImageName);
-				cv::Mat CopyImage, gray;
+				cv::Mat CopyImage, gray, Copygray;
 				image.copyTo(CopyImage);
-				cv::Mat Copygray;
 				cv::resize(CopyImage, CopyImage, cv::Size(360, 480));
 				cv::cvtColor(CopyImage, Copygray, cv::COLOR_BGR2GRAY);
 
@@ -353,6 +352,10 @@ namespace OpenCVTesseract {
 				textBox3->Text = textBoxString;
 				AddReceipt(Render::FindName(clistr)->ToUpper(), Render::FindReceiptNo(clistr), Render::FindPrice(clistr), Render::FindKDV(clistr), 
 					Render::FindProducts(clistr), Render::FindDate(clistr));
+				image.release();
+				CopyImage.release();
+				Copygray.release();
+				api->End();
 			}
 		}
 		System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
