@@ -357,11 +357,6 @@ namespace OpenCVTesseract {
 				textBox3->Text = textBoxString;
 				AddReceipt(Render::FindName(clistr)->ToUpper(), Render::FindReceiptNo(clistr), Render::FindPrice(clistr), Render::FindKDV(clistr), 
 					Render::FindProducts(clistr), Render::FindDate(clistr));
-				/*MessageBox::Show(Render::FindReceiptNo(clistr).ToString());
-				MessageBox::Show(Render::FindKDV(clistr).ToString());
-				MessageBox::Show(Render::FindPrice(clistr).ToString());
-				MessageBox::Show(Render::FindDate(clistr));
-				MessageBox::Show(Render::FindName(clistr));*/
 			}
 		}
 		System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
@@ -384,7 +379,6 @@ namespace OpenCVTesseract {
 		System::Void AddReceipt(String^ marketName, int receiptNo, double total, double kdv, String^ productions, String^ date) {
 			DateTime^ dt = gcnew DateTime();
 			auto dates = date->Split('-');
-			MessageBox::Show(date);
 			int year, month, day;
 			try {
 				Int32::TryParse(dates[2], year);

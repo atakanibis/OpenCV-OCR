@@ -23,25 +23,22 @@ namespace Render{
 	}
 	String^ FindName(String^ text) {
 		auto lines = text->Split('\n');
-		auto line = lines[0];
-		auto uppercase = line->ToUpper();
-		if (uppercase->Contains("IYI GUNLER") || uppercase->Contains("İYİ GüNLER") || uppercase->Contains("TESEKKURLER") || uppercase->Contains("TEŞEKKÜRLER")) {
-			line = lines[1];
-			uppercase = line->ToUpper();			
+		for each (auto line in lines)
+		{
+			auto uppercase = line->ToUpper();
+			if (uppercase->Length < 5) continue;
+			if (!(uppercase->Contains("IYI GUNLER") || uppercase->Contains("İYİ GÜNLER") || uppercase->Contains("TESEKKURLER") || uppercase->Contains("TEŞEKKÜRLER"))) {
+				return line;
+			}
+
 		}
-		if (uppercase->Length < 5)
-			return "-1";
-		return uppercase;
+		return "Unknown";
 	}
 	int FindReceiptNo(String^ text) {
 		String^ replace = (String^)text->Clone();
 		replace = replace->Replace(" ", "")->Replace("ı", "i")->Replace("ş","s");
 		replace = replace->ToUpper();
-		Debug::WriteLine(replace->Contains("POPEYES"));
-		Debug::WriteLine(replace->Contains("FİSNO"));
 		Regex^ regex = gcnew Regex("F\\D*NO\\D*(\\d*)");
-		//Debug::WriteLine(replace);
-		//Debug::WriteLine(regex->ToString());
 		Match^ m = regex->Match(replace);
 		int response = -1;
 		if (m->Success) {
