@@ -27,7 +27,7 @@ namespace Render{
 		{
 			auto uppercase = line->ToUpper();
 			if (uppercase->Length < 5) continue;
-			Regex^ date = gcnew Regex("(TE.EKK.RLER) | (.Y. G.NLER)");
+			Regex^ date = gcnew Regex("(TE.EKK.RLER)|(.Y. G.NLER)");
 			Match^ datematch = date->Match(line);
 			if (datematch->Success) continue;
 			return line;
