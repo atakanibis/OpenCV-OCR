@@ -29,6 +29,8 @@ namespace Render{
 			line = lines[1];
 			uppercase = line->ToUpper();			
 		}
+		if (uppercase->Length < 5)
+			return "-1";
 		return uppercase;
 	}
 	int FindReceiptNo(String^ text) {
