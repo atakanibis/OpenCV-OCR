@@ -1,7 +1,8 @@
+
 #include "Database.h"
 
 Database::Database() {
-	if(connection == NULL) openConnection();
+	if (connection == NULL) openConnection();
 }
 void Database::openConnection() {
 	connection = mysql_init(0);
@@ -11,13 +12,13 @@ void Database::openConnection() {
 }
 void Database::addMarket(System::String^ marketname) {
 	String^ query = "INSERT INTO `markets`(`mname`) VALUES (\"" + marketname + "\")";
-	char * charquery = (char*)Runtime::InteropServices::Marshal::StringToHGlobalAnsi(query).ToPointer();
+	char* charquery = (char*)Runtime::InteropServices::Marshal::StringToHGlobalAnsi(query).ToPointer();
 	int success = mysql_query(connection, charquery);
-	if(success == 0) Debug::WriteLine("Market is successfully added.");
+	if (success == 0) Debug::WriteLine("Market is successfully added.");
 	else Debug::WriteLine("Something went wrong while adding new market.");
 }
 int Database::GetMarketID(System::String^ marketname) {
-	String^ query = "SELECT `mid` FROM `markets` WHERE mname = \""+ marketname +"\"";
+	String^ query = "SELECT `mid` FROM `markets` WHERE mname = \"" + marketname + "\"";
 	char* charquery = (char*)Runtime::InteropServices::Marshal::StringToHGlobalAnsi(query).ToPointer();
 	int success = mysql_query(connection, charquery);
 	if (success == 0) {
@@ -81,7 +82,7 @@ List<Receipt^>^ Database::getAllReceipts() {
 			handler = gcnew String(row[1]);
 			Int32::TryParse(handler, currentReceipt->ReceiptID);
 			currentReceipt->MarketName = gcnew String(row[2]);
-			handler = (gcnew String(row[3]))->Replace(".",",");
+			handler = (gcnew String(row[3]))->Replace(".", ",");
 			Double::TryParse(handler, currentReceipt->TotalPrice);
 			handler = (gcnew String(row[4]))->Replace(".", ",");
 			Double::TryParse(handler, currentReceipt->KDV);

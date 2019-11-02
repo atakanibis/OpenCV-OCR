@@ -1,6 +1,7 @@
+
 #include "Render.h"
 
-namespace Render{
+namespace Render {
 	double FindKDV(String^ text) {
 		String^ replace = (String^)text->Clone();
 		auto lines = replace->Split('\n');
@@ -36,7 +37,7 @@ namespace Render{
 	}
 	int FindReceiptNo(String^ text) {
 		String^ replace = (String^)text->Clone();
-		replace = replace->Replace(" ", "")->Replace("ı", "i")->Replace("ş","s");
+		replace = replace->Replace(" ", "")->Replace("ı", "i")->Replace("ş", "s");
 		replace = replace->ToUpper();
 		Regex^ regex = gcnew Regex("F\\D*NO\\D*(\\d*)");
 		Match^ m = regex->Match(replace);

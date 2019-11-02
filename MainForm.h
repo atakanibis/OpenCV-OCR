@@ -1,3 +1,4 @@
+
 #pragma once
 #include <string>
 #include "Database.h"
@@ -256,11 +257,12 @@ namespace OpenCVTesseract {
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 10;
 			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Click += gcnew System::EventHandler(this, &MainForm::pictureBox1_Click_1);
 			// 
 			// dateTimePicker1
 			// 
 			this->dateTimePicker1->Location = System::Drawing::Point(700, 100);
-			this->dateTimePicker1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->dateTimePicker1->Margin = System::Windows::Forms::Padding(2);
 			this->dateTimePicker1->Name = L"dateTimePicker1";
 			this->dateTimePicker1->Size = System::Drawing::Size(159, 20);
 			this->dateTimePicker1->TabIndex = 11;
@@ -296,10 +298,10 @@ namespace OpenCVTesseract {
 
 		}
 		System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-			for each (DataGridViewRow^ row in dataGridView1->Rows)
+			for each (DataGridViewRow ^ row in dataGridView1->Rows)
 			{
 				if (row->Cells["marketName"]->Value != nullptr) {
-					if(row->Cells["marketName"]->Value->ToString()->Contains(textBox1->Text->ToUpper())) row->Visible = true;
+					if (row->Cells["marketName"]->Value->ToString()->Contains(textBox1->Text->ToUpper())) row->Visible = true;
 					else row->Visible = false;
 				}
 			}
@@ -350,7 +352,7 @@ namespace OpenCVTesseract {
 				System::String^ textBoxString = (System::String^)clistr->Clone();
 				textBoxString = textBoxString->Replace("\n", Environment::NewLine);
 				textBox3->Text = textBoxString;
-				AddReceipt(Render::FindName(clistr)->ToUpper(), Render::FindReceiptNo(clistr), Render::FindPrice(clistr), Render::FindKDV(clistr), 
+				AddReceipt(Render::FindName(clistr)->ToUpper(), Render::FindReceiptNo(clistr), Render::FindPrice(clistr), Render::FindKDV(clistr),
 					Render::FindProducts(clistr), Render::FindDate(clistr));
 				image.release();
 				CopyImage.release();
@@ -385,7 +387,7 @@ namespace OpenCVTesseract {
 				Int32::TryParse(dates[0], day);
 				date = "" + year + "-" + month + "-" + day;
 			}
-			catch(Exception^ Ex) {
+			catch (Exception ^ Ex) {
 
 			}
 			Database^ db = gcnew Database();
@@ -393,6 +395,8 @@ namespace OpenCVTesseract {
 			int marketID = db->GetMarketID(marketName);
 			db->AddReceipt(marketID, receiptNo, total, kdv, productions, date);
 			dataGridView1->Rows->Insert(0, marketName, receiptNo, total, kdv, productions, date);
+		}
+		System::Void pictureBox1_Click_1(System::Object^ sender, System::EventArgs^ e) {
 		}
 	};
 };
